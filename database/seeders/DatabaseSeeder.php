@@ -1,0 +1,23 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Group;
+
+class DatabaseSeeder extends Seeder {
+    public function run(): void {
+        User::query()->create([
+            'username' => 'admin',
+            'display_name' => 'Administrator',
+            'password' => Hash::make('changeMeNow'),
+            'role' => 'admin',
+        ]);
+
+        foreach (['1g','2E','Plus-Klasse'] as $name) {
+            Group::query()->create(['name' => $name]);
+        }
+    }
+}
