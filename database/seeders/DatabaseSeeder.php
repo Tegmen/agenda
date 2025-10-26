@@ -9,15 +9,19 @@ use App\Models\Group;
 
 class DatabaseSeeder extends Seeder {
     public function run(): void {
-        User::query()->create([
-            'username' => 'admin',
-            'display_name' => 'Administrator',
-            'password' => Hash::make('changeMeNow'),
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['username' => 'admin'],
+            [
+                'display_name' => 'Administrator',
+                'name' => 'Administrator',
+                'email' => null,
+                'password' => Hash::make('changeMeNow'),
+                'role' => 'admin',
+            ]
+        );
 
         foreach (['1g','2E','Plus-Klasse'] as $name) {
-            Group::query()->create(['name' => $name]);
+            Group::firstOrCreate(['name' => $name]);
         }
     }
 }
